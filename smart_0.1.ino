@@ -7,6 +7,8 @@
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
+#include <EEPROM.h>
+
 #define SCREEN_WIDTH 128 
 #define SCREEN_HEIGHT 64 
 
@@ -27,8 +29,9 @@ char Data[jelszo_hossz];
 char Tempdat[2];
 char goodcode[jelszo_hossz] = "1234";
 byte data_szamlalo=0, code_szamlalo=0;
-bool goodpass;
+bool goodpass, megvan;
 char vissz,vissz1,vissz2;
+char secu[4]="0000";
 
 const byte sor = 4; 
 const byte oszlop = 3; 
@@ -185,19 +188,16 @@ void temper_set(){
   
     }
   
-  
-
-
-
-  
+   
 void secur(){
        data_szamlalo=0;
        for (int i=0; i<jelszo_hossz-1; i++) {
-        Data[i]='0';
-       }
+        Data[i]='*';
+        }
        lcd.clear();
        lcd.setCursor(0,0);
        lcd.print("Password:");
+       boolean megvan=false;
   do {  
   char bill = billpad.getKey();
   if (bill) {
@@ -206,10 +206,23 @@ void secur(){
     lcd.print(Data[data_szamlalo]);
     data_szamlalo++;
   }
-  if (data_szamlalo==jelszo_hossz-1){
+  if (data_szamlalo==jelszo_hossz-1) {
         lcd.clear();
         data_szamlalo=0; 
-     if(!strcmp(Data,goodcode)) {
+        int sz=0;
+        int address=0;
+        boolean megvan=false;
+       while ((sz<5)  && (megvan==false)){
+        EEPROM.get(address,secu);
+        Serial.println(secu);
+        if (atoi(Data)==atoi(secu)) 
+        {
+          megvan=true;
+        }
+        address=address+sizeof(secu);
+        sz++;
+       }
+      if (megvan==true) {
       lcd.print("Correct");
       delay(500);
       if (tengely==0)  {
@@ -222,7 +235,8 @@ void secur(){
         nyit();
         delay(1000);
         display.clearDisplay();
-      }
+        break;
+          }
       else {
         display.setTextSize(2);             
         display.clearDisplay();  
@@ -233,19 +247,21 @@ void secur(){
         zar();
         delay(1000);
         display.clearDisplay();
-      }
+        break;
+         }
       delay(1000);
       
   }
     else {
+      lcd.clear();
       lcd.print("Pass isn't mutch");
       delay(1000);
       lcd.clear();
       break;
     }
+  }
     }
-        }
-    while (strcmp(Data,goodcode));
+    while (megvan==false);
      
   }
 
@@ -258,6 +274,7 @@ void loop()
    display.println("TEMPERATURE   (2)");
    display.println("LIGHT         (3)");
    display.println("PANIC BUTTON  (4)");
+   display.println("CHANGE PASS   (5)"); 
    display.display();
    lcd.setCursor(0,0);
    lcd.print("MENU (number): ");
