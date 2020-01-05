@@ -82,6 +82,36 @@ A koncepció az volt ebben az első részben, hogy a program a tasztatúráról 
 Mindezek a dolgok szerepelnek az első commit-ban (fájlnév: tastat_v2_2.ino) 
 Hátránya ennek a résznek, hogy a beforrasztott I2C busz-on található kontrasztot állító potméter rendkívül szűk tartományban képes működni. 
 
+A projekt második részében egy menürendszer került megvalósításra és hozzá kapcsolódóan más funkciók is, mint amik eddig voltak. Itt lett csatlakoztatva egy OLED kijelző is a könnyebb megvalósítás és a megnövekedett helyigény kielégítésére. Az OLED 128x64-es felbontású került csatlakoztatásra. Működőképes header fájlt is sikerült találni hozzá. A kapcsolatot a digitális SPI interfészen keresztül sikerült létesíteni. 
+Használt pinek:
+51: MOSI
+52: Clock
+48: DC
+49: Reset
+12: CS
+
+Nem túl jól működik viszont az Arduino-hoz kapcsolt OLED, ha szervo is van csatlakoztatva, mert ilyenkor a kijelző elég hektikusan működik. Próbáltam keresni a net-en megoldásokat, de nem sok jót ígértek a fórumokon sem. Talán egy kondenzátor használata – vagy ellenállások garmadájával kísérletezve – megoldja majd a problémát. 
+
+Ebben a részben az OLED kijelzőn van a választható menüpontok és az LCD-n várja program a tasztatúráról a beérkező választást. (1. Security 2. Temperature 3. Light 4. Panic button 5. Change password) 
+Ezekből egyelőre az első kettő és az utolsó került kidolgozásra, bár az első ponthoz még biztosan lesz néhány funkció hozzáadva. 
+
+Itt szeretném megemlíteni, hogy következő változatban található funkciót is itt írnám le, hiszen csak annyival tud többet, hogy az első pontban megadott funkciók lettek kibővítve. Nevezetesen ugyanúgy maradt a retesz nyitása – zárása, csak a megadott jelszó ellenőrzését egy Epromban tárolt adatbázisból kiolvasva végzi, és ha nem megfelelő a jelszó, akkor kiírja és visszalép a főmenübe.
+
+(A jövőben beépítésre fog kerülni, hogy csak megadott számú alkalommal próbálkozhat a jelszóval, és ha így sem jó egy időre letiltja a rendszer – üzenetet küld mailben – és esetlegesen csak a „master” kulccsal lesz nyitható – zárható)
+
+A második menüpontot választva a hőmérséklet és páratartalom kerül kiírásra (DHT11 szenzor a 10-es pinen kommunikál), az LCD-re és az OLED-en lehetőség van a hőmérséklet beállítására. Megkérdezi, hogy szeretném-e beállítani a hőmérsékletet, és ha igen akkor egy kétjegyű számot vár a program. Természetesen ez a számot is el kell fogadtatni. Ha elfogadtam a számot, akkor a környezeti hőmérséklettől függően (megvizsgálva a szenzorról érkező adatot) fűtés, vagy hűtés indul a modellben, amiről a felhasználó az OLED-en kap tájékoztatást.
+
+Az utolsó menüpontban lehetőség van az eprom-ban tárolt jelszó módosítására. Ehhez meg kell adni a régi jelszót. Ezt leellenőrzi a program. Ha nem helyes visszamegy a főmenübe és kiírja, hogy nem volt jó a jelszó. Ha helyes, akkor meg kell adni az új jelszót a felhasználónak. Az új jelszót a felhasználónak meg kell ismételnie az új jelszót és ha egyezik mind a kettő akkor a régi helyére beírja  a program az új jelszót.
+Sajnos ez a funkció tartalmaz némi hibát (gyanítom, hogy az Eprom sajátossága miatt – nem volt idő teljesen elmélyedni az elektronikai megvalósításba). Az adatot beírja, de flash memóriában lévő, módosított adatot követő adatokat az Arduino törli. Erre majd megoldást két dolgot fogok majd vizsgaidőszakon kívül kipróbálni: 
+-	kiolvasom egy tömbbe az adatokat – csak amit szükséges – és az adatmódosítás követően visszaírom őket az Epromba
+-	a másik megoldás, hogy egy SD kártya olvasóba tárolom el az adatokat valamilyen formában (string, szám?)
+
+Számos helyen az adatok ellenőrzését a COM3-ra való kiíratással lehetett ellenőrizni. 
+
+A jövőben szeretnék hozzácsatlakoztatni a rendszerhez egy mágneses nyitásérzékelőt és egy PIR mozgásérzékelőt. A terv az, hogy az innen származó adatokat csak akkor veszi figyelembe, ha a nem lesz otthon senki. Lesz külön kód az otthoni bezárkózásra, és ha elmegy otthonról. Azt is szeretném majd megvalósítani, hogyha nem lesz otthon senki (zárás a kimenő kóddal) akkor, ha behatoló van, azt üzenetben jelezze a rendszer (W5500 modul csatlakoztatása SPI interfészen keresztül). Szeretném összekapcsolni QNAP NAS-sel. Nagyon jól tudja kezelni a szerver ezeket a rendszereket.
+
+ Led lámpákkal is szeretném a funkciókat megtámogatni. Szeretném kipróbálni azt is, hogy a telefon keresztül is vezérelhető legyen néhány funkció (akár a világítás kapcsolása, akár a pánik gomb kiterjesztése) 
+Persze, megvalósítani az elmaradt dolgokat a menüpontokban, de ezekhez már az ethernet modul is kelleni fog. De ha lesz még plusz ötlet akkor azt is bele lehet venni majd, esetleg objektumokat létrehozva. 
 
 
 
