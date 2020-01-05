@@ -15,7 +15,7 @@ A projekthez vásárolt eddigi eszközök, szenzorok:
 •	Szalagkábelek
 •	Arduino KC-1602-BB LCD kék-fehér kijelző
 
- ![alt test](pictures/LCD)
+ ![alt test](pictures/LCD.png)
 
 •	Arduino LCD-I2C-IF interfész adapter az LCD kijelzőhöz
 
