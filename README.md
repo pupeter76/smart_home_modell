@@ -5,24 +5,33 @@ Igazából még soha nem írtam fejlesztői dokumentációt, de megpróbálok va
 A projekthez vásárolt eddigi eszközök, szenzorok:
 •	Arduino Mega 2560
  ![alt test](pictures/Mega2560.png)
+
 •	Arduino KP-4X3/MEM tasztatúra billentyűzet
  ![alt test](pictures/tastat.png)
+
 •	Szalagkábelek
 •	Arduino KC-1602-BB LCD kék-fehér kijelző
  ![alt test](pictures/LCD)
- •	Arduino LCD-I2C-IF interfész adapter az LCD kijelzőhöz
+
+•	Arduino LCD-I2C-IF interfész adapter az LCD kijelzőhöz
  ![alt test](pictures/I2C.png)
+
 •	Arduino MS/SG90 micro servo
  ![alt test](pictures/servo.png)
+
 •	Különféle méretű és színű led lámpák (egyszerű programozásuk miatt csak később kerülnek majd beépítésre)
 •	HanRun HR911105A W5500 típusú SPI ethernet modull
  ![alt test](pictures/W5500.png)
+
 •	Arduino DHT11-M hőmérséklet és páratartalom érzékelő
  ![alt test](pictures/DHT11.png)
+
 •	Arduino GY-30 környezeti fényérzékelő
  ![alt test](pictures/GY30_fény.png)
+
 •	Arduino D096-12864-SPI6 OLED kijelző
  ![at test](pictures/OLED.png)
+
 •	PIR mozgásérzékelő szenzor
 •	Breadboard
 •	Kapcsoló + tápegység külön a breadboardhoz
@@ -32,6 +41,7 @@ A projekthez vásárolt eddigi eszközök, szenzorok:
 Tervezett még a projekthez vásárolni:
 •	Arduino MHC-05/4 bluetooth modul
 ![alt test](pictures/bluetooth.png) 
+
 •	Arduino MICROSD-M microsd kártya kezelő modul
 •	Illetve ide kapcsolódik még, hogy összekapcsolni az itthon QNAP szerverrel (kipróbálásra került és sikeres volt, de mivel még van mit rajt csiszolni nem került bele a vizsgaanyagba)
 A fenti felsorolásból a vizsgaanyagba beépítésre kerültek, aminek a működése „majdnem” tökéletes:
