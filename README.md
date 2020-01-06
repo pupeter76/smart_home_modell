@@ -93,14 +93,21 @@ Eredetileg nem a 22-28 –as „pin”-eken működött, csak később került �
 A koncepció az volt ebben az első részben, hogy a program a tasztatúráról bekér néhány számot – mint egy jelszót – megvizsgálja, hogy a megadott szám megegyezik-e a programban eltárolt számmal. Ha egyezés van, akkor képernyőre írja, hogy „correct” és a tengely állásától függően mozgatja a szervónak a motorját és tájékoztatást ír az LCD-re, hogy a reteszzár éppen nyit, vagy zár (deadlock). Ha nem egyezik, akkor újraindul a ciklus.
 
 Mindezek a dolgok szerepelnek az első commit-ban (fájlnév: tastat_v2_2.ino) 
+
 Hátránya ennek a résznek, hogy a beforrasztott I2C busz-on található kontrasztot állító potméter rendkívül szűk tartományban képes működni. 
 
 A projekt második részében egy menürendszer került megvalósításra és hozzá kapcsolódóan más funkciók is, mint amik eddig voltak. Itt lett csatlakoztatva egy OLED kijelző is a könnyebb megvalósítás és a megnövekedett helyigény kielégítésére. Az OLED 128x64-es felbontású, és ez került csatlakoztatásra. Működőképes header fájlt is sikerült találni hozzá. A kapcsolatot a digitális SPI interfészen keresztül sikerült létesíteni. 
+
 Használt pinek:
+
 51: MOSI
+
 52: Clock
+
 48: DC
+
 49: Reset
+
 12: CS
 
 Nem túl jól működik viszont az Arduino-hoz kapcsolt OLED, ha szervo is van csatlakoztatva, mert ilyenkor a kijelző elég hektikusan működik. Próbáltam keresni a net-en megoldásokat, de nem sok jót ígértek a fórumokon sem. Talán egy kondenzátor használata – vagy ellenállások garmadájával kísérletezve – megoldja majd a problémát. 
