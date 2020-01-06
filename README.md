@@ -91,7 +91,7 @@ A fenti felsorolásból a vizsgaanyagba beépítésre kerültek, aminek a műkö
 
 A projekt első részében bár nem kerültek „commitba”, de olyan feladatok kerültek elvégzésre, mint a szenzorok tesztelése („serial”-ra) íratása. A következő lépésben forrasztópáka beszerzése után az I2C beforrasztása volt az LCD kijelző kivezetéseire. Ezt azért gondoltam szükségesnek, mert így kevesebb „port”-ra van szükség a kommunikáció megvalósítására. A mega2560-on (a feszültség és a földelés mellett) az adatcsere az I2C buszon keresztül – természetesen megcímezve – a 20-as SDA és a 21-es SCL portokon valósult meg.
 
-![alt test](pictures/páka.jpg) ![alt test](pictures/hőszenzor.jpg)
+![alt test](pictures/páka.jpg) ![alt test](pictures/hőszenzor.jpg) ![alt test](pictures/kezdeti_lépések.jpg) ![alt test](pictures/kezdeti2)
 
 
 A kommunikációhoz szükséges cím megszerzése egy segédprogrammal valósult meg, amelyet szintén a rövidsége miatt nem részletezném. 
@@ -120,6 +120,8 @@ Használt pinek:
 
 12: CS
 
+![alt test](pictures/lcd_menü.jpg)
+
 Nem túl jól működik viszont az Arduino-hoz kapcsolt OLED, ha szervo is van csatlakoztatva, mert ilyenkor a kijelző elég hektikusan működik. Próbáltam keresni a net-en megoldásokat, de nem sok jót ígértek a fórumokon sem. Talán egy kondenzátor használata – vagy ellenállások garmadájával kísérletezve – megoldja majd a problémát. 
 
 Ebben a részben az OLED kijelzőn van a választható menüpontok és az LCD-n várja program a tasztatúráról a beérkező választást: 
@@ -129,15 +131,23 @@ Ebben a részben az OLED kijelzőn van a választható menüpontok és az LCD-n 
 4. Panic button 
 5. Change password
 
+![alt test](pictures/oled_menü.jpg)
+
 Ezekből egyelőre az első kettő és az utolsó került kidolgozásra, bár az első ponthoz még biztosan lesz néhány funkció hozzáadva. 
 
 Itt szeretném megemlíteni, hogy következő változatban található funkciót is itt írnám le, hiszen csak annyival tud többet, hogy az első pontban megadott funkciók lettek kibővítve és az ötös pont megvalósítása is később történt. Nevezetesen ugyanúgy maradt a retesz nyitása – zárása, csak a megadott jelszó ellenőrzését egy Epromban tárolt adatbázisból kiolvasva végzi, és ha nem megfelelő a jelszó, akkor kiírja és visszalép a főmenübe.
+
+![alt test](pictures/lcd_pass.jpg) ![alt test](pictures/lcd_corr.jpg) 
 
 (A jövőben beépítésre fog kerülni, hogy csak megadott számú alkalommal próbálkozhat a jelszóval, és ha így sem jó egy időre letiltja a rendszer – üzenetet küld mailben – és esetlegesen csak a „master” kulccsal lesz nyitható – zárható)
 
 A második menüpontot választva a hőmérséklet és páratartalom kerül kiírásra (DHT11 szenzor a 10-es pinen kommunikál), az LCD-re és az OLED-en lehetőség van a környzeti hőmérséklet beállítására. Megkérdezi, hogy szeretném-e beállítani a hőmérsékletet, és ha igen akkor egy kétjegyű számot vár a program. Természetesen ez a számot is el kell fogadtatni. Ha elfogadtam a számot, akkor a környezeti hőmérséklettől függően (megvizsgálva a szenzorról érkező adatot) fűtés, vagy hűtés "indul" a modellben, amiről a felhasználó az OLED-en kap tájékoztatást. Ha valós lenne, akkor ezeket könnyűszerrel meg lehet valósítani egy-két "pin" értékét magasra állítva egy-egy relét vezérelve és időként vizsgálva a szenzorról érkező értéket és ha szükséges akkor kikapcsolni a relét (pin alacsonyra állításával).
 
+![alt test](pictures/lcd_dht_data.jpg) ![alt test](pictures/set_temp.jpg) ![alt test](pictures/set_temp2.jpg)
+
 Az utolsó menüpontban lehetőség van az eprom-ban tárolt jelszó módosítására. Ehhez meg kell adni a régi jelszót. Ezt leellenőrzi a program. Ha nem helyes visszamegy a főmenübe és kiírja, hogy nem volt jó a jelszó. Ha helyes (Epromból keresi a megadott jelszót),  akkor meg kell adni az új jelszót a felhasználónak. Az új jelszót a felhasználónak meg kell ismételnie, és ha egyezik mind a kettő akkor a régi helyére beírja  a program az új jelszót.
+
+![alt test](pictures/chg_pass.jpg)
 
 Sajnos ez a funkció tartalmaz némi hibát (gyanítom, hogy az Eprom sajátossága miatt – nem volt idő teljesen elmélyedni hogy milyen módón valósították meg az elektronikát - soronként, oszloponként vagy blokkonként van megoldva a programozási lehetőség - vagy egy blokk hány bájt...). Az adatot beírja, de flash memóriában lévő, módosított adatot követő adatokat az Arduino törli. 
 Erre majd megoldást két dolgot fogok majd vizsgaidőszakon kívül kipróbálni: 
