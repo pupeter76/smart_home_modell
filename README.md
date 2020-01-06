@@ -91,7 +91,7 @@ A fenti felsorolásból a vizsgaanyagba beépítésre kerültek, aminek a műkö
 
 A projekt első részében bár nem kerültek „commitba”, de olyan feladatok kerültek elvégzésre, mint a szenzorok tesztelése („serial”-ra) íratása. A következő lépésben forrasztópáka beszerzése után az I2C beforrasztása volt az LCD kijelző kivezetéseire. Ezt azért gondoltam szükségesnek, mert így kevesebb „port”-ra van szükség a kommunikáció megvalósítására. A mega2560-on (a feszültség és a földelés mellett) az adatcsere az I2C buszon keresztül – természetesen megcímezve – a 20-as SDA és a 21-es SCL portokon valósult meg.
 
-![alt test](pictures/páka.jpg) ![alt test](pictures/hőszenzor.jpg) ![alt test](pictures/kezdeti_lépések.jpg) ![alt test](pictures/kezdeti2)
+![alt test](pictures/páka.jpg) ![alt test](pictures/hőszenzor.jpg) ![alt test](pictures/kerdeti_lépések.jpg) ![alt test](pictures/kezdeti2.jpg)
 
 
 A kommunikációhoz szükséges cím megszerzése egy segédprogrammal valósult meg, amelyet szintén a rövidsége miatt nem részletezném. 
