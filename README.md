@@ -44,12 +44,17 @@ A projekthez vásárolt eddigi eszközök, szenzorok:
  ![at test](pictures/OLED.png)
 
 •	PIR mozgásérzékelő szenzor
+
 •	Breadboard
+
 •	Kapcsoló + tápegység külön a breadboardhoz
+
 •	Mágneses nyitásérzékelő szenzor
+
 •	Ellenállások a led lámpákhoz
 
 Tervezett még a projekthez vásárolni:
+
 •	Arduino MHC-05/4 bluetooth modul
 
 ![alt test](pictures/bluetooth.png) 
