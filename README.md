@@ -88,6 +88,8 @@ A fenti felsorolásból a vizsgaanyagba beépítésre kerültek, aminek a műkö
 	Illetve felhasználásra került a belső EEPROM , mint adatbázis tárolási helye, amely a jövőben átkerül majd SD kártyára, illetve majd a NAS-ra (is)– bár  az EEPROM is közel  100000 írási ciklust ki kellne, hogy bírjon a leírások alapján
 
 A projekt első részében bár nem kerültek „commitba”, de olyan feladatok kerültek elvégzésre, mint a szenzorok tesztelése („serial”-ra) íratása. A következő lépésben forrasztópáka beszerzése után az I2C beforrasztása volt az LCD kijelző kivezetéseire. Ezt azért gondoltam szükségesnek, mert így kevesebb „port”-ra van szükség a kommunikáció megvalósítására. A mega2560-on (a feszültség és a földelés mellett) az adatcsere az I2C buszon keresztül – természetesen megcímezve – a 20-as SDA és a 21-es SCL portokon valósult meg. 
+![alt test](pictures/páka.jpg)
+
 
 A kommunikációhoz szükséges cím megszerzése egy segédprogrammal valósult meg, amelyet szintén a rövidsége miatt nem részletezném. 
 Külön segédprogrammal volt tesztelve a szervo motor működése, amelyet egy reteszzárt modellezne. Tengelyállástól (0-180) függően bezár – eltolva a reteszeket – vagy kinyit. 
