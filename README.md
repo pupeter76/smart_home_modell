@@ -59,15 +59,25 @@ Tervezett még a projekthez vásárolni:
 •	Illetve ide kapcsolódik még, hogy összekapcsolni az itthon QNAP szerverrel (kipróbálásra került és sikeres volt, de mivel még van mit rajt csiszolni nem került bele a vizsgaanyagba)
 
 A fenti felsorolásból a vizsgaanyagba beépítésre kerültek, aminek a működése „majdnem” tökéletes:
+
 	Arduino Mega 2560
+
 	Arduino KP-4X3/MEM tasztatúra billentyűzet
+
 	Szalagkábelek
+
 	Arduino KC-1602-BB LCD kék-fehér kijelző
+
 	Arduino LCD-I2C-IF interfész adapter az LCD kijelzőhöz
+
 	Arduino MS/SG90 micro servo
+
 	Arduino DHT11-M hőmérséklet és páratartalom érzékelő
+
 	Arduino D096-12864-SPI6 OLED kijelző
+
 	Breadboard
+
 	Kapcsoló + tápegység külön a breadboardhoz
 
 	Illetve felhasználásra került a belső EEPROM , mint adatbázis tárolási helye, amely a jövőben átkerül majd SD kártyára, illetve majd a NAS-ra (is)– bár  az EEPROM is közel  100000 írási ciklust ki kellne, hogy bírjon a leírások alapján
